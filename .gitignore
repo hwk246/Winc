@@ -9,3 +9,5 @@ print/main.py
 comments/__pycache__/main.cpython-310.pyc
 comments/main.py
 calculate/__pycache__/main.cpython-310.pyc
+operators/main.py
+operators/__pycache__/main.cpython-310.pyc
