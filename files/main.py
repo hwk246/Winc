@@ -5,7 +5,7 @@ __human_name__ = "files"
 import os
 from zipfile import ZipFile
 
-
+# create cache folder in case not existing. deletes content of cache folder in case existing
 def clean_cache():
     if os.path.exists(absolute_path_cache) or os.path.isdir(absolute_path_cache):
         files_in_directory = os.listdir(absolute_path_cache)
@@ -13,14 +13,13 @@ def clean_cache():
             os.remove(os.path.join(absolute_path_cache, file))
     else: os.mkdir(absolute_path_cache)
 
-
-def cache_zip(zip_file, place_of_storage):
-    zip_dir = os.path.join(pwd_files, zip_file )
-    storage_dir = os.path.join(pwd_files, place_of_storage )
+# extracts zip folder in cache directory
+def cache_zip(zip_dir, storage_dir):
+    
     with ZipFile(zip_dir, 'r') as zipObj: # 'r' -> mode='read'
         zipObj.extractall(storage_dir)
 
-  
+# creates list of files in cache folder as absolute path
 def cached_files():
     cached_files_list = []
     files_in_directory = os.listdir(absolute_path_cache)
@@ -29,22 +28,21 @@ def cached_files():
         
     return cached_files_list
 
-
+# finds 'password' in zip folder files content
 def find_password(cached_files_list):
     for file_path in cached_files_list:
-        file_content = open(file_path).read()
-        if 'password' in file_content:
-            password_in =  file_content
-            break
+        file_content = open(file_path).readlines()
+        for line in file_content:
+            if line.find('password') == 0:
+                return (line[line.find(' ')+1: line.find('\n')])
+               
 
-    return password_in[password_in.find('c'):password_in.find('le')+2]
- 
-
-pwd_files = os.path.abspath('files')                    # pwd -> path working directory used in 'clean_cache()' and 'cach_zip()'
+pwd_files = os.path.abspath('files') # pwd -> path working directory used in 'clean_cache()' and 'cach_zip()'
 absolute_path_cache = os.path.join(pwd_files, 'cache')  # used in 'cached_files()' and' clean_cache()'
+absolute_path_zip = os.path.join(pwd_files, 'data.zip' ) # used in 
 
 if __name__ == '__main__':
     clean_cache()
-    cache_zip('data.zip', 'cache')
+    cache_zip(absolute_path_zip, absolute_path_cache)
     cached_files()
-    find_password(cached_files())
+    print(find_password(cached_files()))

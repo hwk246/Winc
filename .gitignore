@@ -45,3 +45,8 @@ modules/greet.py
 modules/main.py
 modules/__pycache__/greet.cpython-310.pyc
 modules/__pycache__/main.cpython-310.pyc
+Class_01.py
+classes/main.py
+classes/__pycache__/main.cpython-310.pyc
+errors/main.py
+errors/__pycache__/main.cpython-310.pyc
