@@ -1,13 +1,21 @@
+from venv import create
 from csv_alterations import open_csv
 import PySimpleGUI as sg
 from datetime import datetime, date
 
 
 # create data for  pySimpleGui overview of selected fruit
-def create_overview(operation):
+def create_overview():
     output = []
-    if operation == 'buy':
-        items_from_bought_csv = open_csv('bought')
+    
+    items_from_bought_csv = open_csv('bought')
+    
+    items_from_sell_csv = open_csv('sell')
+    
+
+   
+'''
+
         list_of_unique_fruits = []
 
         # get a list of all unique fruits         
@@ -63,17 +71,5 @@ def create_overview(operation):
 
     window.close
 
-   
-    '''
-    for item in items_from_bought_csv:
-        if item[1] == fruit:
-            date_str_obj1 = datetime.strptime(item[5], '%Y-%m-%d').date()
-            if date_str_obj1 > date.today() :
-                total_amount_sellable_fruit += int(item[2])
-            else: total_amount_expired_fruit += int(item[2])
-
-    print('See overview on Fruit Machine of fruit in stock')
-   
-    '''
-
+   '''
 
