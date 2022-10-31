@@ -71,3 +71,5 @@ superpy/__pycache__/csv_read_write.cpython-310.pyc
 superpy/__pycache__/main.cpython-310.pyc
 superpy/__pycache__/mpl_graph.cpython-310.pyc
 superpy/__pycache__/overview.cpython-310.pyc
+superpy/buy_sell.py
+superpy/buy_sell.py
