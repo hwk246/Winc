@@ -23,7 +23,7 @@ def calculate_profit():
     unique_data_list = list(set(dates))
     unique_data_list.sort()
     x_axis = []
-    y_axis =[]
+    profit =[]
 
     for operation_date in unique_data_list:
         bought_on_date = 0
@@ -36,11 +36,11 @@ def calculate_profit():
                 sold_on_date += float(item[3])
         profit_on_date = sold_on_date - bought_on_date
         x_axis.append(operation_date)
-        y_axis.append(profit_on_date)
+        profit.append(profit_on_date)
 
-    company_result = np.cumsum(y_axis)
+    company_result = np.cumsum(profit)
 
-    create_profit_graph(x_axis, y_axis, company_result)
+    create_profit_graph(x_axis, profit, company_result)
     
     
 

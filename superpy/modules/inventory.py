@@ -103,6 +103,6 @@ def create_overview():
             if event == 'Ok' or event == sg.WIN_CLOSED:
                 break
             elif event == 'Create XML':
-                print('------------ > Sorry, not available yet')
+                print('------------ > Sorry, not available yet - BetaRelease 2023 < --------------' )
 
     window.close

@@ -18,7 +18,7 @@ def increment(operation):
     if operation == 'buy':
         file_name = 'text_files/bought_prod_number.txt'
     elif operation == 'sell':
-        file_name = 'sell_prod_number.txt'
+        file_name = 'text_files/sell_prod_number.txt'
     
     current_number = open(file_name, 'r')
     number = int(current_number.readline())+1

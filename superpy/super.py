@@ -1,6 +1,6 @@
 import argparse
-import modules.revenue
 import os
+import modules.revenue
 from modules.csv_alterations import init_csv, add_to_csv
 from modules.sell_product import sell
 from modules.inventory import create_overview
@@ -15,17 +15,39 @@ __human_name__ = "superpy"
 
 def main():
     parser = argparse.ArgumentParser(description='fruit-machine')
-    parser.add_argument('operation', type=str, metavar='buy, sell, profit_graph, inventory, revenue' ,
-                        help='A buy or a sell action', choices=['buy', 'sell', 'profit_graph', 'inventory', 'revenue', 'profit'], nargs='?')
-    parser.add_argument('--product_name', type=str, metavar='', help='What kind of fruit you want to buy or sell?')
-    parser.add_argument('--price', type=float, metavar='', help='At what price the fruit is sold or bought?')
-    parser.add_argument('--expiration_date', type= lambda x: string_to_date(x), metavar='', 
+    parser.add_argument('operation', 
+                        type=str, metavar='buy, sell, inventory, revenue, profit',
+                        help='A buy or a sell action or to get an overview', 
+                        choices=['buy', 'sell', 'inventory', 'revenue', 'profit'],
+                        nargs='?'
+                        )
+    parser.add_argument('--product_name', 
+                        type=str, 
+                        metavar='', 
+                        help='What kind of fruit you want to buy or sell?')
+    parser.add_argument('--price', 
+                        type=float, 
+                        metavar='', 
+                        help='At what price the fruit is sold or bought?')
+    parser.add_argument('--expiration_date', 
+                        type=str, 
+                        metavar='', 
                         help='When you buy, what is the expiration date?')
-    parser.add_argument('--date', type=str, metavar='', help='To get the revenue for a specific month of the year')
-    parser.add_argument('--now', action=('store_true'), help='To show inventory at current date')
-    parser.add_argument('--today', action=('store_true'), help='To show revenue at current date')
-    parser.add_argument('--yesterday', action=('store_true'), help='To show results at current date - 1day')
-    parser.add_argument('--advance_time', type=int, metavar='', help='This gives you the opportunity to change the current date.')
+    parser.add_argument('--date', type=str,
+                        metavar='', 
+                        help='To get the revenue for a specific month of the year')
+    parser.add_argument('--now', 
+                        action=('store_true'), 
+                        help='To show inventory at current date')
+    parser.add_argument('--today', 
+                        action=('store_true'), 
+                        help='To show revenue at current date')
+    parser.add_argument('--yesterday', 
+                        action=('store_true'), 
+                        help='To show results at current date - 1day')
+    parser.add_argument('--advance_time', 
+                        type=int, metavar='', 
+                        help='This gives you the opportunity to change the current date.')
     
    
     args = parser.parse_args()
@@ -40,7 +62,7 @@ def main():
         set_current_date(-1)
         create_overview()
         set_current_date(1)
-    elif args.operation == 'profit_graph':
+    elif args.operation == 'profit':
         calculate_profit()
     elif args.advance_time:
         set_current_date(args.advance_time)
@@ -50,9 +72,7 @@ def main():
         modules.revenue.get_revenue('yesterday')
     elif args.operation == 'revenue' and args.date:
         modules.revenue.get_revenue(args.date)
-   
-        
-    else: print('--- invalid input, check arguments')
+    else: print('--- invalid input, check arguments ---')
 
 if __name__ == "__main__":   
  

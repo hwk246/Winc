@@ -41,7 +41,7 @@ def add_to_csv(a,b,c,d='empty',e='empty'):
     
 
 # read content of csv-file
-# using 'reader()' instead of 'DictReader()' for list-output wich in this case is more practical (although it is just a flatten(dict))
+# using 'reader()' instead of 'DictReader()' for list-output wich in this case is more practical (flatten(dict))
 def open_csv(sell_buy):
     if sell_buy == 'bought':
         csv_path = abs_path_bought_csv
