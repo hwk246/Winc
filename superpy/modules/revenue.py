@@ -1,9 +1,8 @@
 import PySimpleGUI as sg
 from datetime import datetime
 from modules.csv_alterations import open_csv
-from modules.set_date import get_current_date, string_to_date, subtract_one_day 
+from modules.set_date_and_time import get_current_date, string_to_date, subtract_one_day 
 from modules.PySimpleGui import create_window
-
 
 
 def revenue_total(revenue_date, desired_date=None):

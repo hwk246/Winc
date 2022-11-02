@@ -4,8 +4,7 @@ import modules.revenue
 from modules.csv_alterations import init_csv, add_to_csv
 from modules.sell_product import sell
 from modules.inventory import create_overview
-from modules.set_date import get_current_date, string_to_date
-from modules.set_date import set_current_date
+from modules.set_date_and_time import set_current_date, set_advance_time, get_current_date
 from modules.profit import calculate_profit
 
 
@@ -52,7 +51,7 @@ def main():
    
     args = parser.parse_args()
 
-    if args.operation == 'buy'  and args.product_name and args.price and args.expiration_date:
+    if args.operation == 'buy'  and args.product_name and args.price and args.expiration_date:   
         add_to_csv(args.operation, args.product_name, get_current_date(), args.price, args.expiration_date)
     elif args.operation == 'sell' and args.product_name and args.price:
         sell(args.product_name, args.price)
@@ -66,6 +65,7 @@ def main():
         calculate_profit()
     elif args.advance_time:
         set_current_date(args.advance_time)
+        set_advance_time(args.advance_time)
     elif args.operation == 'revenue' and args.today:
         modules.revenue.get_revenue('today')
     elif args.operation == 'revenue' and args.yesterday:

@@ -14,6 +14,7 @@ def create_profit_graph(x_axis, profit, company_result):
             'result': company_result,
             'zero_line': line}
 
+    # table overview from profit and result in command line
     df = pd.DataFrame.from_dict(data); df
     print('')
     print('-------------------------------------------')

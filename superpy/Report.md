@@ -54,3 +54,7 @@ python super.py sell --product_name airplane --price 1
 ### CSV files
 
 Not knowing to much about CSV the first option was to use **csv.DictReader**. Further on is **csv.reader** seamed more usefull because of the list-output wich is easy iterable. Eventhough the DictReader output can be flattened this is one step faster.
+
+### Advance time
+
+I know myself!, always forget to change the date back to the original date. So for a selling or buying operation I arranged a check function to see if the current date is used. If not a message shows how many days you have to reset the date to be .. up-to-date.
