@@ -4,7 +4,7 @@ from modules.csv_alterations import open_csv
 from modules.set_date_and_time import get_current_date, string_to_date, subtract_one_day 
 from modules.PySimpleGui import create_window
 
-
+# calculate the revenue of today, yesterday or a specific month
 def revenue_total(revenue_date, desired_date=None):
     sold_items = open_csv('sell')
     revenue = 0
@@ -25,6 +25,7 @@ def revenue_total(revenue_date, desired_date=None):
         return [revenue, month_name]
 
 
+# prepare the output for specific argument today, yesterday or a month of the year
 def get_revenue(desired_date):
     information =[]
    

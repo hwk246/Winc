@@ -6,4 +6,3 @@ prod_id,product_name,count,buy_date,buy_price,expiration_date
 10005,grapes,1,2020-01-06,2.0,2020-01-07
 10006,melon,1,2020-01-10,2.0,2020-01-14
 10007,orange,1,2020-01-11,0.5,2020-01-12
-10008,strawberry,1,2020-01-11,0.8,2020-01-15

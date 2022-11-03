@@ -53,4 +53,3 @@ def sell(product_name, price):
             information = [sg.Text(f'{product_name} is not in stock', size=(50,2), justification='center')]
 
         create_window(information)
-    

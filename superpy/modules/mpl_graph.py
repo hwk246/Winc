@@ -1,4 +1,3 @@
-import PySimpleGUI as sg
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -36,4 +35,3 @@ def create_profit_graph(x_axis, profit, company_result):
     plt.ylabel('results', fontsize=12)
     plt.legend(['company result','line_zero','profit' ])
     plt.show()
-    
