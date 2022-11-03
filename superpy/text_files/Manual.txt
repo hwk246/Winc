@@ -1,0 +1,202 @@
+WELCOME
+=======
+When you have succesfully cloned or copied the programm to you computer. 
+In the commandline go to de superpy directory ...\superpy
+
+From this startingpoint you can use de Command line Interface.
+
+
+AHEAD START
+===========
+To give you an ahead start by testing the program some buying and selling action are already done and registered in bought.csv and sold.csv. 
+Also the current date and some other parameters have been set correctly
+
+buy action:
+prod_id,product_name,count,buy_date,buy_price,expiration_date
+10001,orange,1,2020-01-01,0.8,2020-01-12
+10002,appel,1,2020-01-02,0.6,2020-01-05
+10003,appel,1,2020-01-03,0.9,2020-01-13
+10004,peer,1,2020-01-05,1.3,2020-01-20
+10005,grapes,1,2020-01-06,2.0,2020-01-07
+10006,melon,1,2020-01-10,2.0,2020-01-14
+10007,orange,1,2020-01-11,0.5,2020-01-12
+
+sell action:
+id,bought_id,sell_date,sell_price
+20001,10001,2020-01-02,1.8
+20002,10003,2020-01-09,1.0
+20003,10004,2020-01-11,1.8
+20004,10007,2020-01-11,1.8
+
+
+Paramaters
+- bought product number is set to 10007
+- sold product number is set to 20004
+- advance_time_reset is set to 0
+- current date is set on 2020-01-11. (Today you bought an orange and sold the peer. 
+  now it is up to you.)
+
+Just by executing the --type--> actions you will get to know the programm
+--------------------------------------------------------------------------
+
+
+THE PROGRAMM
+This is an overview of options you can use:
+
+--type-->  python super.py -h
+----------------------------------------------------------------------------------
+fruit-machine
+
+positional arguments:
+  buy, sell, inventory, revenue, profit
+                        A buy or a sell action or to get an overview
+
+options:
+  -h, --help            show this help message and exit
+  --product_name        What kind of fruit you want to buy or sell?
+  --price               At what price the fruit is sold or bought?
+  --expiration_date     When you buy, what is the expiration date?
+  --date                To get the revenue for a specific month of the year
+  --now                 To show inventory at current date
+  --today               To show revenue at current date
+  --yesterday           To show results at current date - 1day
+  --advance_time        This gives you the opportunity to change the current date.
+----------------------------------------------------------------------------------
+
+
+First action: buy a product
+---------------------------
+a buying action needs 
+    1. buy (as the action you want to do)
+    2. --product_name (fa 'strawberry')
+    3. --price (fa 0.8 the buy price)
+    4. --expiration_date (fa 2020-01-05)  wich stands for year-month-day
+
+--type--> python super.py buy --product_name strawberry --price 0.8 --expiration_date 2020-01-15
+
+The programm will tell you when the product is registered (added to the bought.csv file)
+Don't worry the programm will initiate a file for you if it does not exist
+This action can be repeated as many times as needed to register every purchased item.
+
+Be aware only to use existing date --- 2020-02-30 does not exist. 
+
+
+Selling a product:
+--------------------
+a selling action needs 
+    1. sell (as the action you want to do)
+    2. --product_name (fa 'orange')
+    3. --price (fa 1.8 the selling price)
+
+--type--> python super.py sell --product_name orange --price 1.8 
+don't worry, all your oranges were sold.. try again
+
+--type--> python super.py sell --product_name melon --price 1.8 
+
+As you experienced the programm will tell you when the product is registered (added to the sold.csv file)
+Also if the product is 'not in stock', 'expired' or 'already sold' you will be notified.
+
+
+
+Inventory
+----------
+looking at the inventory needs
+    1. inventory(as the action you want to do)
+    2. either --now or --yesterday
+
+--type--> python super.py inventory --now
+the time is still set at 2020-01-11 and your inventory looks like this:
+
+INVENTORY @2020-01-11
+----------------------------------------------------
+ID      productName  Price  Sellable    Expired
+10002   appel        0.6    no          2020-01-06
+10005   grapes       2.0    no          2020-01-07
+10006   strawberry   0.8    yes         2020-01-15
+
+Inventory      Value
+Stock goods    0.8
+expired goods  2.6
+----------------------------------------------------
+the appel and the grapes are no more sellable. The represent a value of 2.6
+the strawberry you just bought can still be sold. 
+
+to look at the inventory on yesterday
+--type--> python super.py inventory --yesterday
+yesterday you had still a melon in stock that you sold just a few steps ago in this manual
+
+
+Advance time
+------------
+It can be usefull to Advance time and see what the inventory will look like in the future. 
+
+Advance time needs
+    1. --advance_time 
+    2. number of days you want to advance in time
+
+--type--> python super.py --advance_time 5
+when you now look at the the inventory you will see that in 5 days also you strawberry will be expired. 
+--type--> python super.py inventory --now
+
+        BE AWARE THAT THE CURRENT DATE IS SET TO 5 DAYS IN THE FUTURE. PLEASE RESET THE CURRENT DATE BY -5
+        --type--> python super.py --advance_time -5  to return to the current_date
+
+Do not worry if you forget to reset the advance time. If you try to buy or sell something the programm will notify you of the fact that you live in the future and your action will be corrupt
+
+
+Revenue
+--------
+To see what the revenue is so far you neede
+    1. revenue (as the action you want to do)
+    2. three choices this time --today, --yesterday or a specific month --date
+
+--type--> python super.py revenue --today
+--type--> python super.py revenue --yesterday
+in this case between today and yesterday there is no difference. You did not sell anything
+
+--type--> python super.py revenue --date 2020-01 (january 'this' year)
+the revenu of january 2020 is shown.
+
+
+profit
+------
+To get a good view on you organisation you look at your daily profit and company results so far.
+To see the profit you need
+    1. profit ( as the action you want to do)
+
+--type--> python super.py profit
+See for youself that it not positive yet but going in the right direction. I advise to sell the strawberry for at least 1.5 to break even. 
+
+a numeric overview is shown in th commandline
+-------------------------------------------
+         date  profit  result  zero_line
+0  2020-01-01    -0.8    -0.8          0
+1  2020-01-02     1.2     0.4          0
+2  2020-01-03    -0.9    -0.5          0
+3  2020-01-05    -1.3    -1.8          0
+4  2020-01-06    -2.0    -3.8          0
+5  2020-01-09     1.0    -2.8          0
+6  2020-01-10    -2.0    -4.8          0
+7  2020-01-11     4.1    -0.7          0
+-------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
