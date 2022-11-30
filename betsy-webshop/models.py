@@ -1,4 +1,4 @@
-from peewee import SqliteDatabase, CharField, IntegerField, Model, TextField, DecimalField, ManyToManyField, ForeignKeyField, DateField
+from peewee import SqliteDatabase, CharField, IntegerField, Model, TextField, DecimalField, ManyToManyField, ForeignKeyField, DateField, DateTimeField
 from datetime import datetime
 
 db = SqliteDatabase('betsy.db')
@@ -16,7 +16,7 @@ class User(Model):
         database=db
 
 class Tag(Model):
-    tag_name=CharField()
+    tag_name=CharField(unique=True)
 
     class Meta:
         database=db
@@ -32,6 +32,8 @@ class Product(Model):
     class Meta:
         database=db
 
+''' option 1 standard with autofield primary key
+
 class Transaction(Model):
     user_id=ForeignKeyField(User)
     product_id=ForeignKeyField(Product)
@@ -40,6 +42,25 @@ class Transaction(Model):
     
     class Meta:
             database=db
+'''
+
+'''
+    option 2 combined indexes as primary - multiple combination user_id and product_id possible by different datetime
+'''
+class Transaction(Model):
+    user_id=IntegerField()
+    product_id=IntegerField()
+    bought_amount=IntegerField()
+    transaction_date=DateTimeField(default=datetime.now())
+    
+    class Meta:
+            database=db
+            primary_key=False
+            indexes =(
+                (('user_id', 'product_id', 'transaction_date'), True),
+                (('user_id', 'product_id'), False)
+            )
+            
 
 ProductTag = Product.tags.get_through_model()
 
